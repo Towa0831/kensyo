@@ -1,0 +1,29 @@
+name: Xserverへ自動転送
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: リポジトリのファイルを取り出す
+        uses: actions/checkout@v4
+
+      - name: XserverへFTPSで転送
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+            server: ${{ secrets.FTP_SERVER }}
+            username: ${{ secrets.FTP_USERNAME }}
+            password: ${{ secrets.FTP_PASSWORD }}
+            protocol: ftps
+            timeout: 120000
+            log-level: verbose
+            server-dir: ○○-test.com/public_html/github-test/
+            exclude: |
+              **/.git*
+              **/.git*/**
+              README.md
+              CLAUDE.md
