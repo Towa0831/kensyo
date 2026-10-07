@@ -20,7 +20,7 @@ jobs:
           protocol: ftps
           port: 21
           local-dir: ./
-          server-dir: ./hisazumi-test.com/public_html/kensyo
+          server-dir: ./hisazumi-test.com/public_html/kensyo/
           exclude: |
             **/.git*
             **/.git*/**
